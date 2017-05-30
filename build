@@ -5,6 +5,7 @@ output_dir=$1
 export LANG="en_US.UTF-8"
 export GEM_HOME=$output_dir
 
+echo "ruby -v: $(ruby -v)"
 echo "running: $ gem install $GEM --version $VERSION --no-ri --no-rdoc --env-shebang"
 gem install $GEM --version $VERSION --no-ri --no-rdoc --env-shebang
 
