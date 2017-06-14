@@ -21,8 +21,23 @@ $ heroku create
 Set your buildpack
 
 ```
-$ heroku config:set BUILDPACK_URL=https://github.com/schneems/buildit-buildpack
+$ heroku buildpacks:add heroku/ruby
+$ heroku buildpacks:add https://github.com/schneems/buildit-buildpack
 ```
+
+The `heroku/ruby` is needed otherwise Ruby is in a different directory such as `/usr/bin/ruby2.3` and that will get added to the shebang lines of the gem i.e.
+
+```
+#!/usr/bin/env ruby2.3
+```
+
+Which is not correct. It should be:
+
+```
+#!/usr/bin/env ruby
+```
+
+To get this, we force an install of Ruby earlier on the path using the `heroku/ruby` buildpack which puts a `ruby` executable path.
 
 Set config vars needed for this script:
 
